@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
 import { Info, AlertTriangle, XCircle, CheckCircle } from "lucide-react";
+import { LuGraduationCap } from "react-icons/lu";
 
 interface CalloutProps {
-  type?: "info" | "warning" | "danger" | "success";
+  type?: "info" | "warning" | "danger" | "success"| "lvl_beginner" | "lvl_intermediate" | "lvl_advanced" ;
   title?: string;
   children: ReactNode;
 }
@@ -15,6 +16,9 @@ const styles = {
     "bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-800 text-red-900 dark:text-red-100",
   success:
     "bg-green-50 dark:bg-green-950/50 border-green-200 dark:border-green-800 text-green-900 dark:text-green-100",
+    lvl_beginner: "bg-emerald-50 dark:bg-emerald-950/50 border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-100",
+  lvl_intermediate: "bg-amber-50 dark:bg-amber-950/50 border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-100",
+  lvl_advanced: "bg-rose-50 dark:bg-rose-950/50 border-rose-300 dark:border-rose-700 text-rose-900 dark:text-rose-100",
 };
 
 const icons = {
@@ -22,6 +26,9 @@ const icons = {
   warning: AlertTriangle,
   danger: XCircle,
   success: CheckCircle,
+  lvl_beginner: LuGraduationCap,
+  lvl_intermediate: LuGraduationCap,
+  lvl_advanced: LuGraduationCap
 };
 
 const defaultTitles = {
@@ -29,6 +36,9 @@ const defaultTitles = {
   warning: "Warning",
   danger: "Danger",
   success: "Success",
+  lvl_beginner: "Level: Beginner",
+  lvl_intermediate:"Level: Intermediate",
+  lvl_advanced: "Level: Advanced",
 };
 
 export function Callout({ type = "info", title, children }: CalloutProps) {
