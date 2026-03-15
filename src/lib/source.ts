@@ -80,10 +80,10 @@ export function getLLMIndex(baseUrl: string) {
   return lines;
 }
 
-export async function getLLMFullText() {
+export async function getLLMFullText(baseUrl: string) {
   const pages = getEnglishPages().map(async (page) => {
     const processed = await page.data.getText("processed");
-    return `# ${page.data.title}\n\n${processed}`;
+    return `--- ${page.data.title}\nSource: ${baseUrl}${page.url}\n${processed}`;
   });
   return Promise.all(pages);
 }

@@ -8,7 +8,6 @@ export async function GET() {
 
   const header = [
     "# Hytale Modding Documentation",
-    "",
     "> The number one community resource for modding Hytale, featuring comprehensive guides, detailed documentation, and essential tools to kickstart your modding journey.",
     "",
     "## Docs",
@@ -20,7 +19,7 @@ export async function GET() {
     "## Links",
     "",
     `- [Full Documentation (LLM-optimized)](${baseUrl}/llms-full.txt)`,
-    `- [Wiki](https://wiki.hytalemodding.dev)`,
+    `- [Wiki](https://wiki.hytalemodding.dev) - This is the official Wiki project from HytaleModding. It allows mod teams to create and manage documentation for their mods, making it easy for players and developers to find the information they need.`,
     "",
   ].join("\n");
 
