@@ -33,6 +33,7 @@ import HylandiaLogo from "./(showcaseImages)/Hylandia_Logo.png";
 import MagicCircleGust from "./(showcaseImages)/MagicCircleGust.gif";
 import Shroomie from "./(showcaseImages)/Shroomie.gif";
 import Froggy from "./(showcaseImages)/Froggy.gif";
+import VoileBanner from "./(showcaseImages)/voile.png";
 import { DiscordButton } from "./discord-button";
 import { SponsorButton } from "./support-button";
 import { GitInfoButton } from "@/components/git-info-button";
@@ -57,70 +58,77 @@ interface ShowcaseItem {
 const showcaseItems: ShowcaseItem[] = [
   {
     title: "Hynergy: Electric Motor",
-    author: "by seyager",
+    author: "seyager",
     image: ElectricMotor,
     link: "https://x.com/SeyagerYT",
     type: "art",
   },
   {
     title: "[WIP] Hylamity: Wulfrum Prosthesis",
-    author: "by slader._.",
+    author: "slader._.",
     image: WulfrumProsthesis,
     link: "https://discord.gg/f2fMKYnRqR",
     type: "art",
   },
   {
     title: "[WIP] Soundscape: Melodium Chunk",
-    author: "by 44Hydras",
+    author: "44Hydras",
     image: Melodium,
     link: "https://discord.com/users/197065442479702016",
     type: "art",
   },
   {
     title: "Gale Wivern",
-    author: "by Nicolas | Tourne_Vis",
+    author: "Nicolas | Tourne_Vis",
     image: GaleWivern,
     link: "https://x.com/TourneVis_MC",
     type: "art",
   },
   {
     title: "[WIP] Hylamity: Wulfrum Armor",
-    author: "by slader._.",
+    author: "slader._.",
     image: WulfrumArmor,
     link: "https://discord.gg/f2fMKYnRqR",
     type: "art",
   },
   {
     title: "[WIP] Hylamity: Wulfrum Triangle",
-    author: "by slader._.",
+    author: "slader._.",
     image: WulfrumTriangle,
     link: "https://discord.gg/f2fMKYnRqR",
     type: "art",
   },
   {
     title: "Saqvobase's Spellcasting: Magic Circle - Gust",
-    author: "by Saqvobase",
+    author: "Saqvobase",
     image: MagicCircleGust,
     link: "",
     type: "art",
   },
   {
     title: "Shroomie",
-    author: "by Miyako Hikari",
+    author: "Miyako Hikari",
     image: Shroomie,
     link: "",
     type: "art",
   },
   {
     title: "Froggy",
-    author: "by Unknown Knight",
+    author: "Unknown Knight",
     image: Froggy,
     link: "",
     type: "art",
   },
   {
+    title: "Voile",
+    author: "mayuna",
+    image: VoileBanner,
+    link: "https://www.curseforge.com/hytale/mods/docs",
+    type: "art",
+  },
+  {
     title: "Hylandia",
-    author: "by Kristian / Hylandia Studios",
+    author: "Kristian / Hylandia Studios",
     logo: HylandiaLogo,
     banner: HylandiaBanner,
     link: "https://discord.gg/hylandia",
@@ -134,6 +142,7 @@ const ShowcaseCard = ({ item }: { item: ShowcaseItem }) => {
   const hasImage = item.image;
   const hasLogo = item.logo;
   const hasBanner = item.banner;
+  const messages = useMessages();
 
   return (
     <Card className="relative h-64 w-96 overflow-hidden">
@@ -146,7 +155,7 @@ const ShowcaseCard = ({ item }: { item: ShowcaseItem }) => {
                   {item.title}
                 </h3>
                 <p className="text-muted-foreground z-20 text-base">
-                  {item.author}
+                  {messages.showcaseItems.madeBy.replace("{author}", item.author)}
                 </p>
                 {item.description && (
                   <p className="text-muted-foreground z-20 mt-1 line-clamp-2 text-sm">
@@ -317,13 +326,13 @@ export default function HomePage() {
                   scale={0.9}
                 />
                 <div className="bg-background hover:bg-background/85 relative mx-4 rounded-lg p-2 text-sm font-medium shadow-md transition-colors duration-200 ease-in-out">
-                  <Link
-                    href={"https://hytalemodjam.com"}
+                    <Link
+                    href={"https://hytalemodding.dev/en/grants"}
                     className="flex items-center justify-center gap-2 text-wrap"
-                  >
-                    We hosted the first Hytale Modjam with $5,000 in prizes!{" "}
-                    <ArrowRightIcon className="h4 w-4" />
-                  </Link>
+                    >
+                    We launched the HytaleModding x BisectHosting Grant Program!{" "}
+                    <ArrowRightIcon className="h-4 w-4" />
+                    </Link>
                 </div>
               </div>
               <h1 className="text-4xl font-semibold text-balance md:text-5xl">
