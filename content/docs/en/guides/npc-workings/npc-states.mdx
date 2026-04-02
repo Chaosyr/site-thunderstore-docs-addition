@@ -21,7 +21,7 @@ The practical usage of **States** is that it makes writing and reading the **Ins
 }
 ```
 
-You can make as many **States** as you want but ***REMEMBER*** they all must be **LINKED** together in some way from the **StartState** state. Otherwise your **Role** fails to validate in your Json file and you will become very sad.
+You can make as many **States** as you want but ***REMEMBER*** they all must be **LINKED** together in some way from the **StartState** state. Otherwise your **Role** fails to validate in your JSON file and you will become very sad.
 
 Using the example above this **State** will work if you set `"StartState"` to `"Idle"` in your **Role**. If its not set the default state will be: `"start"`, so make sure to set it to a state that makes sense like `"Idle"`.
 
@@ -282,9 +282,9 @@ Notice how we just went to the `Farm.Goto` **State** immediatly instead of first
 
 With clever use of **Sub-states** will writing **Instructions** be a lot more enjoyable.
 
-**Note:** `"$Comment"` will be ignored by Hytale when reading the Json file. Its used for commenting instructions and other things. There is also `"$Todo"` for the same purpose.
+**Note:** `"$Comment"` will be ignored by Hytale when reading the JSON file. Its used for commenting instructions and other things. There is also `"$Todo"` for the same purpose.
 
-## Parent state and Json components
+## Parent state and JSON components
 If you ever looked into Hytale **Component** files then you will notice they don't use `"State"` **Actions** when setting state. That is because **Components** are special cases. You will need to instead use the type `"ParentState"` to set a **State** from a **Component**.
 
 > **Example from: Component_Instruction_Damage_Check.json**
@@ -377,7 +377,7 @@ Using all this knowledge you can do some neat tricks with **States**. You can us
 ### Case study
 You can study my old **Role** I used for my Little Helpers mod for insights on how it was accomplished. A good starting point is to look for the `.AskTask1` **Sub-state** where the cycle starts. This is before I implemented my own Java **Plugin** code to ease this kind of logic.
 
-**Role Json:** [Template_Fairy.json](/assets/guides/Template_Fairy.json)
+**Role JSON:** [Template_Fairy.json](/assets/guides/Template_Fairy.json)
 
 > **From Template_Fairy.json**
 > 

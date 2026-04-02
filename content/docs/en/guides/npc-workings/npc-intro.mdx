@@ -1,5 +1,5 @@
 ---
-title: NPCs - From the simple to the complicated
+title: NPC Introduction
 description: A introduction and demystifier of NPCs.
 authors:
     - name: "ChJees"
@@ -19,13 +19,13 @@ A NPC has a **Role** from which its functionality comes from. Without one it can
 
 The NPC goes through many **States** in its lifetime when it interacts and reacts with the world. From idling around to going into a panic or engaging in combat. **States** can be really simple to becoming really intricate branches of **Instructions**.
 ## What is a role?
-You set what *properties* a NPC has in a **Role** and this is where the actual logic rests in. Everything rests inside this Json file.
+You set what *properties* a NPC has in a **Role** and this is where the actual logic rests in. Everything rests inside this JSON file.
 
-The **Role** Json files must be located in this directory inside your mod: `.\NPC\Roles`
+The **Role** JSON files must be located in this directory inside your mod: `.\NPC\Roles`
 
-It is vital to place your **Role** Json files inside ***this*** directory because of how Hytale load mod assets. It is not the same directory structure that Hytale has, so keep that in mind. Other asset types also abide to these strict rules.
+It is vital to place your **Role** JSON files inside ***this*** directory because of how Hytale load mod assets. It is not the same directory structure that Hytale has, so keep that in mind. Other asset types also abide to these strict rules.
 ## What is a instruction?
-**Instructions** are the core of your NPC. They come in many forms but the main one you will be interacting with is the humble `Instructions` block in the Json file.
+**Instructions** are the core of your NPC. They come in many forms but the main one you will be interacting with is the humble `Instructions` block in the JSON file.
 
 It goes from top to bottom when executing the laid down instructions, only ever stopping if the most nested instruction matches its **Sensor**.
 
@@ -158,7 +158,7 @@ Are they bad? No, they are in fact the best way to change how a NPC acts in cert
 ```
 > *While I'm Idle, if a player with red berries in hand are around I will seek them out. Otherwise I will wander around.*
 
-You may wonder what **"Reference"** is at the last instruction, it will be covered in another page in detail. The very quick version is that it allows you to reuse parts of a Json in many different files.
+You may wonder what **"Reference"** is at the last instruction, it will be covered in another page in detail. The very quick version is that it allows you to reuse parts of a JSON in many different files.
 ## What to do now?
 Since you now have an inkling of what is in store for NPCs, the first thing you should do is to extract the **Server** and **Common** folders from the `Assets.zip` file from your Hytale installation. Exclude the `Prefabs` folder from **Server** since we won't need it. The main file we will be referencing a lot is the `Template_Livestock.json` since it contains a lot of useful tricks when it come to instructions.
 
@@ -175,7 +175,7 @@ Keep in mind that we will be referencing the `Server\NPC\Roles` folder a lot dur
 ## TL;DR
 NPCs are derived from **Role** JSON files.
 
-The **Role** Json files ***must*** be located in this directory inside your mod: `.\NPC\Roles`
+The **Role** JSON files ***must*** be located in this directory inside your mod: `.\NPC\Roles`
 
 NPC roles can be found in the `Server\NPC\Roles` folder in the Hytale `Assets.zip` archive.
 

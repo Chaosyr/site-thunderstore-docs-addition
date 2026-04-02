@@ -16,7 +16,7 @@ Roles can be changed during the lifetime of an NPC, so the possibilities are wel
 ## Types
 Roles come in three flavors: **Generic**, **Variant** & **Abstract**.
 
-Out of all three is **Generic** the default one. It is declared as is with no preprocessing needing to be done. What is preprocessing you wonder? In short it looks at the Json file it is and see if anything needs to be changed before Hytale reads it for its data.
+Out of all three is **Generic** the default one. It is declared as is with no preprocessing needing to be done. What is preprocessing you wonder? In short it looks at the JSON file it is and see if anything needs to be changed before Hytale reads it for its data.
 
 It is rarely used outside of testing because **Templates** are a widely used practice, because it saves time and let you reuse data and instructions across several roles with just a simple reference. The most reused templates can be found in the `Server\NPC\Roles\_Core\Templates` folder.
 
@@ -54,8 +54,8 @@ It is rarely used outside of testing because **Templates** are a widely used pra
 }
 ```
 
-Variant **Cube** inherits from the Abstract **Template_Shape** and creates Json file that looks like this in memory after all preprocessing is done:
-> **Cube role Json in memory**
+Variant **Cube** inherits from the Abstract **Template_Shape** and creates JSON file that looks like this in memory after all preprocessing is done:
+> **Cube role JSON in memory**
 ```json
 {
     "Type":"Variant",
@@ -70,7 +70,7 @@ While this example has a incomplete role it helps to illustrate how role **Types
 ## Parameters and modifying them
 You may noted that in the previous example was the fields **Parameters** and **Modify**. They are used with the preprocessor to help to both make **Abstract** roles modifiable in their **Variant** roles, they are also used in other contexts when it come to making NPCs. Such as passing data to **Components** (Not to be confused with components in the **ECS**)
 
-We can set the parameters easily in our role Json file.
+We can set the parameters easily in our role JSON file.
 ```json
 "Parameters":{
     "ParameterName1":{
@@ -88,7 +88,7 @@ We can set the parameters easily in our role Json file.
 }
 ```
 
-Also easily modify them in another role Json file that references our template:
+Also easily modify them in another role JSON file that references our template:
 ```json
 "Modify": {
     "ParameterName1": "Oranges",
@@ -144,7 +144,7 @@ Comparing things can also be done. Useful for setting a value in the **"Enabled"
 - `<` : Lesser than, if the left side is lesser than the right side it is **true**. **Example:** left \< right
 - `<=` : Lesser than or equals, if the left side is lesser than or equals to the right side it is **true**. **Example:** left \<= right
 
-There are other functions with **Compute** too that Hytale added in order to make their Json preprocessing much easier. Here are all of them found so far:
+There are other functions with **Compute** too that Hytale added in order to make their JSON preprocessing much easier. Here are all of them found so far:
 - **true** : Boolean constant for true.
 - **false** : Boolean constant for false.
 - **PI** : The value of [pi](https://en.wikipedia.org/wiki/Pi).
@@ -337,7 +337,7 @@ Why should you care about this file so much? It is because it contains all the *
 
 It is located in: `Server\NPC\Roles\_Core\Templates`
 
-For example if you look at the `"InteractionInstructions"` in the file will you see a reusable tree structure for handling different cases where the player interacts with the NPC. It is easy to modify and get to work in your own Role Json files.
+For example if you look at the `"InteractionInstructions"` in the file will you see a reusable tree structure for handling different cases where the player interacts with the NPC. It is easy to modify and get to work in your own Role JSON files.
 
 It also shows a good usage of the `"Enabled"` property in instructions which leads to highly modular templates that can be reused for ***many*** **Roles**.
 
@@ -467,7 +467,7 @@ Try to use *cheap* **Sensors** when possible to avoid lagging the server.
 
 Learn and understand the versatility of **States** because that is the main building block of your NPC **Role**. This is a topic for another page in itself.
 
-When you repeat the same piece of instructions, actions or sensors many times it may be worth looking into **Component** Json files. But that is a topic for another page.
+When you repeat the same piece of instructions, actions or sensors many times it may be worth looking into **Component** JSON files. But that is a topic for another page.
 ## What now?
 Test a lot. Figure out what makes a NPC tick through its role. Look at existing roles made by the Hytale developers to see how they did it.
 
