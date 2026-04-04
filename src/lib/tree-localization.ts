@@ -1,5 +1,6 @@
 import FallbackLanguage from "@/../messages/en.json";
 import * as fs from "fs";
+import { Node, Root } from "fumadocs-core/page-tree";
 import { DocsLayoutProps } from "fumadocs-ui/layouts/docs";
 import * as path from "path";
 
@@ -53,20 +54,35 @@ export function localizePageTree(
     return text;
   }
 
-  function traverseNode(node: any): any {
+  function traverseNode<TraversableNode extends Node | Node[] | Root>(
+    node: TraversableNode,
+  ): TraversableNode {
     if (!node) return node;
 
-    if (node.name) node.name = translateString(node.name);
-
-    if (node.title) node.title = translateString(node.title);
-
-    if (node.index && typeof node.index === "object") traverseNode(node.index);
-
-    if (Array.isArray(node.children)) {
-      for (let i = 0; i < node.children.length; i++) {
-        traverseNode(node.children[i]);
+    function traverseChildren(children: Node[]) {
+      for (let i = 0; i < children.length; i++) {
+        traverseNode(children[i]);
       }
     }
+
+    if (Array.isArray(node)) {
+      for (let i = 0; i < node.length; i++) {
+        traverseNode(node[i]);
+      }
+      return node;
+    }
+
+    if ("name" in node && typeof node.name === "string")
+      node.name = translateString(node.name);
+
+    if ("title" in node && typeof node.title === "string")
+      node.title = translateString(node.title);
+
+    if ("index" in node && node.index && typeof node.index === "object")
+      traverseNode(node.index);
+
+    if ("children" in node && Array.isArray(node.children))
+      traverseChildren(node.children);
 
     return node;
   }
