@@ -60,11 +60,13 @@ export function localizePageTree(
 
     if (node.title) node.title = translateString(node.title);
 
-    if (node.index && typeof node.index === "object")
-      node.index = traverseNode(node.index);
+    if (node.index && typeof node.index === "object") traverseNode(node.index);
 
-    if (Array.isArray(node.children))
-      node.children = node.children.map(traverseNode);
+    if (Array.isArray(node.children)) {
+      for (let i = 0; i < node.children.length; i++) {
+        traverseNode(node.children[i]);
+      }
+    }
 
     return node;
   }
