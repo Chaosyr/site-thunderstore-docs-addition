@@ -1,12 +1,26 @@
 import FallbackLanguage from "@/../messages/en.json";
 import * as fs from "fs";
+import { Node, Root } from "fumadocs-core/page-tree";
 import { DocsLayoutProps } from "fumadocs-ui/layouts/docs";
 import * as path from "path";
 
 export function localizePageTree(
   tree: DocsLayoutProps["tree"],
   lang: string,
+  options?: {
+    translateName?: boolean;
+    translateTitle?: boolean;
+    translateIndex?: boolean;
+    translateChildren?: boolean;
+  },
 ): DocsLayoutProps["tree"] {
+  const {
+    translateName = true,
+    translateTitle = true,
+    translateIndex = true,
+    translateChildren = true,
+  } = options ?? {};
+
   let translations = FallbackLanguage;
 
   if (lang !== "en") {
@@ -20,27 +34,24 @@ export function localizePageTree(
     }
   }
 
-  function getTranslation(key: string): string {
-    const parts = key.split(".");
-    let value = translations;
+  function getTranslation(
+    key: string,
+    translationMap: Record<string, string | object>,
+  ): string | undefined {
+    const keys = key.split(".");
+    let translated: string | Record<string, string | object> = translationMap;
 
-    for (const part of parts) {
-      if (value && typeof value === "object" && part in value) {
-        value = (value as Record<string, any>)[part];
-      } else {
-        value = FallbackLanguage;
-        for (const fallbackPart of parts) {
-          if (value && typeof value === "object" && fallbackPart in value) {
-            value = (value as Record<string, any>)[fallbackPart];
-          } else {
-            return key;
-          }
-        }
-        break;
-      }
+    for (let i = 0; i < keys.length; i++) {
+      if (translated == null || typeof translated !== "object")
+        return undefined;
+      translated = translated[keys[i]] as
+        | string
+        | Record<string, string | object>;
     }
 
-    return typeof value === "string" ? value : key;
+    if (typeof translated !== "string") return undefined;
+
+    return translated;
   }
 
   function translateString(text: string): string {
@@ -48,26 +59,55 @@ export function localizePageTree(
 
     const match = text.match(/^\{(.+)\}$/);
     if (match) {
-      return getTranslation(match[1]);
+      let translation = getTranslation(match[1], translations);
+      if (translation) return translation;
+
+      console.debug(`key '{${match[1]}}' not found in '${lang}'`);
+      translation = getTranslation(match[1], FallbackLanguage);
+      if (translation) return translation;
+
+      console.warn(`key '{${match[1]}}' not found in '${lang}' and EN`);
+      return text;
     }
+
     return text;
   }
 
-  function traverseNode(node: any): any {
-    if (!node) return node;
+  function traverseNode<TraversableNode extends Node | Node[] | Root>(
+    node: TraversableNode,
+  ) {
+    function traverseChildren(children: Node[]) {
+      for (let i = 0; i < children.length; i++) {
+        traverseNode(children[i]);
+      }
+    }
 
-    if (node.name) node.name = translateString(node.name);
+    if (Array.isArray(node)) {
+      for (let i = 0; i < node.length; i++) {
+        traverseNode(node[i]);
+      }
+      return;
+    }
 
-    if (node.title) node.title = translateString(node.title);
+    if (translateName && "name" in node && typeof node.name === "string")
+      node.name = translateString(node.name);
 
-    if (node.index && typeof node.index === "object")
-      node.index = traverseNode(node.index);
+    if (translateTitle && "title" in node && typeof node.title === "string")
+      node.title = translateString(node.title);
 
-    if (Array.isArray(node.children))
-      node.children = node.children.map(traverseNode);
+    if (translateIndex && "index" in node && typeof node.index === "object")
+      traverseNode(node.index);
 
-    return node;
+    if (
+      translateChildren &&
+      "children" in node &&
+      Array.isArray(node.children)
+    ) {
+      traverseChildren(node.children);
+    }
   }
 
-  return traverseNode(tree);
+  traverseNode(tree);
+
+  return tree;
 }
